@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEGIS-VERITAS | Evidence & Case Record Integrity Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Top Navigation Bar
+       ======================================================================== -->
+  <header class="top-navbar">
+    <div class="logo-group">
+      <div class="logo-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <div class="brand-info">
+        <h1>
+          AEGIS-VERITAS
+          <span class="badge-veritas">Verifiable Ledger</span>
+        </h1>
+        <p data-i18n="brand_sub">Inter-Agency Cryptographic Case Integrity Grid • Police | FSL Labs | Judiciary</p>
+      </div>
+    </div>
+
+    <!-- Navigation Views -->
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-view="dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span data-i18n="nav_cases">Case Dossiers</span>
+      </button>
+
+      <button class="nav-btn" data-view="tamper-lab">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        <span data-i18n="nav_tamper">Tamper Simulator Lab</span>
+      </button>
+
+      <button class="nav-btn" data-view="architecture">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+        </svg>
+        <span data-i18n="nav_matrix">How It Works & Matrix</span>
+      </button>
+    </nav>
+
+    <!-- Nav Actions & Multilingual Switcher -->
+    <div class="nav-actions">
+      <!-- Language Selector -->
+      <div class="lang-selector-box">
+        <label for="language-select">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span data-i18n="lang_label">Language:</span>
+        </label>
+        <select id="language-select" class="lang-select">
+          <option value="en">English (US)</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="es">Español (Spanish)</option>
+          <option value="fr">Français (French)</option>
+        </select>
+      </div>
+
+      <div class="system-status-indicator">
+        <div class="pulse-dot"></div>
+        <span data-i18n="system_synced">MERKLE ROOT SYNCHRONIZED</span>
+      </div>
+
+      <button class="btn-secondary" onclick="openCertificateModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="12" y1="18" x2="12" y2="12"></line>
+          <line x1="9" y1="15" x2="15" y2="15"></line>
+        </svg>
+        <span data-i18n="btn_cert">Sec 65B / 63 Certificate</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Content Container
+       ======================================================================== -->
+  <main class="main-content">
+
+    <!-- Beginner-Friendly "How It Works" 3-Step Walkthrough Card -->
+    <section class="how-it-works-card">
+      <div class="how-header">
+        <h3 data-i18n="how_title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          How It Works: Protecting Justice in 3 Simple Steps
+        </h3>
+        <span style="font-size: 0.78rem; color: var(--accent-blue); font-weight: 700;">Simple & Transparent for Everyone</span>
+      </div>
+
+      <div class="how-steps-row">
+        <div class="how-step-col">
+          <div class="how-step-num">1</div>
+          <div class="how-step-content">
+            <h4 data-i18n="how_step1_title">1. Police Registration</h4>
+            <p data-i18n="how_step1_desc">The officer files the FIR and logs physical evidence bags. A permanent cryptographic SHA-256 fingerprint is stamped instantly.</p>
+          </div>
+        </div>
+
+        <div class="how-step-col">
+          <div class="how-step-num">2</div>
+          <div class="how-step-content">
+            <h4 data-i18n="how_step2_title">2. Forensic Examination</h4>
+            <p data-i18n="how_step2_desc">The lab verifies the physical seal upon receipt, conducts ballistics or chemical tests, and digitally seals the final report.</p>
+          </div>
+        </div>
+
+        <div class="how-step-col">
+          <div class="how-step-num">3</div>
+          <div class="how-step-content">
+            <h4 data-i18n="how_step3_title">3. Court Admissibility</h4>
+            <p data-i18n="how_step3_desc">The judge views the complete, untampered record. If any word or number was altered in transit, an alert triggers immediately.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Crisis Problem Statement Banner -->
+    <section class="crisis-banner">
+      <div class="crisis-header">
+        <div class="crisis-tag-group">
+          <span class="alert-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span data-i18n="crisis_tag">Systemic Legal Vulnerability Addressed</span>
+          </span>
+          <span style="font-size: 0.76rem; color: var(--accent-blue); font-family: var(--font-mono); font-weight: 700;" data-i18n="crisis_meta">
+            RFC 3161 TSA • SHA-256 Merkle Provenance
+          </span>
+        </div>
+      </div>
+
+      <h2 class="crisis-title" data-i18n="crisis_title">
+        Eliminating Undetected Tampering Across Law Enforcement, Forensic Labs & Judicial Bodies
+      </h2>
+
+      <p class="crisis-description" data-i18n="crisis_desc">
+        Law enforcement agencies, forensic laboratories, and courts handle voluminous, mission-critical case records—such as 
+        First Information Reports (FIRs), sworn witness testimonies, charge sheets, and forensic findings—using fragmented legacy systems and physical paperwork, exposing evidence to undetected tampering.
+      </p>
+
+      <div class="crisis-stats-row">
+        <div class="crisis-stat-card">
+          <div class="crisis-stat-icon" style="background: var(--accent-rose-light); color: var(--accent-rose);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <line x1="9" y1="15" x2="15" y2="9"></line>
+            </svg>
+          </div>
+          <div class="crisis-stat-info">
+            <h4 data-i18n="stat_zero_title">0 Silent Tampering</h4>
+            <p data-i18n="stat_zero_desc">Every single keystroke or page swap invalidates the cryptographic Merkle root instantly</p>
+          </div>
+        </div>
+
+        <div class="crisis-stat-card">
+          <div class="crisis-stat-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="crisis-stat-info">
+            <h4 data-i18n="stat_handover_title">3.2 Seconds</h4>
+            <p data-i18n="stat_handover_desc">Digital evidence handover between Police, Lab and Court (vs 14.8 days courier transit)</p>
+          </div>
+        </div>
+
+        <div class="crisis-stat-card">
+          <div class="crisis-stat-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="crisis-stat-info">
+            <h4 data-i18n="stat_prov_title">100% Provenance</h4>
+            <p data-i18n="stat_prov_desc">Court-admissible certificate under Section 65B Evidence Act / Section 63 BSA</p>
+          </div>
+        </div>
+
+        <div class="crisis-stat-card">
+          <div class="crisis-stat-icon" style="background: var(--accent-purple-light); color: var(--accent-purple);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </div>
+          <div class="crisis-stat-info">
+            <h4 data-i18n="stat_hsm_title">Hardware Sealed</h4>
+            <p data-i18n="stat_hsm_desc">HSM-backed Officer & Scientist Key Pairs with biometrically tied non-repudiation</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Executive Metrics Grid -->
+    <section class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title" data-i18n="metric_records">Sealed Case Records</span>
+          <div class="metric-icon-wrap" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value">4,892</span>
+          <span class="metric-delta delta-positive">+12 today</span>
+        </div>
+        <div class="metric-subtext" data-i18n="metric_records_sub">FIRs, ballistic logs, post-mortems & chargesheets</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title" data-i18n="metric_custody">Chain of Custody Score</span>
+          <div class="metric-icon-wrap" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value">99.98%</span>
+          <span class="metric-delta delta-positive">Optimal</span>
+        </div>
+        <div class="metric-subtext" data-i18n="metric_custody_sub">Zero broken custody links across regional labs</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title" data-i18n="metric_tamper">Tamper Attempts Blocked</span>
+          <div class="metric-icon-wrap" style="background: var(--accent-rose-light); color: var(--accent-rose);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value">28</span>
+          <span class="metric-delta delta-alert">Intercepted</span>
+        </div>
+        <div class="metric-subtext" data-i18n="metric_tamper_sub">Record substitution & hash mismatch alarms flagged</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-title" data-i18n="metric_speed">Inter-Agency Sync Speed</span>
+          <div class="metric-icon-wrap" style="background: var(--accent-purple-light); color: var(--accent-purple);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-value">4.2s</span>
+          <span class="metric-delta delta-neutral">99.4% faster</span>
+        </div>
+        <div class="metric-subtext" data-i18n="metric_speed_sub">Replaces 14-day postal & dispatch transit times</div>
+      </div>
+    </section>
+
+    <!-- Tri-Agency Perspective Switcher -->
+    <section class="agency-switch-section">
+      <div class="agency-label-group">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        <div>
+          <div class="agency-label-title" data-i18n="agency_title">Inter-Agency Sector Perspectives</div>
+          <div class="agency-label-desc" data-i18n="agency_desc">Filter records, audits, and custody steps by authority domain</div>
+        </div>
+      </div>
+
+      <div class="agency-pills-row">
+        <button class="agency-pill active-all" data-agency="all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span data-i18n="agency_all">All Unified Systems</span>
+        </button>
+
+        <button class="agency-pill" data-agency="police">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span data-i18n="agency_police">Law Enforcement (Police)</span>
+        </button>
+
+        <button class="agency-pill" data-agency="forensic">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 18h8"></path>
+            <path d="M3 22h18"></path>
+            <path d="M14 22a7 7 0 1 0-7-7"></path>
+            <path d="M9 14h2"></path>
+            <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path>
+            <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path>
+          </svg>
+          <span data-i18n="agency_forensic">Forensic Labs (CFSL / FSL)</span>
+        </button>
+
+        <button class="agency-pill" data-agency="court">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m14 13-7.5 7.5c-.8.8-2.2.8-3 0s-.8-2.2 0-3L11 10"></path>
+            <path d="m16 16 6-6"></path>
+            <path d="m8 8 6-6"></path>
+            <path d="m9 7 8 8"></path>
+            <path d="m21 11-8-8"></path>
+          </svg>
+          <span data-i18n="agency_court">Judicial Bodies (Courts)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Main View 1: Mission-Critical Case Dossiers & Chain of Custody
+         ====================================================================== -->
+    <div id="main-cases-view" class="view-grid">
+
+      <!-- Left Column: Case List -->
+      <aside class="case-list-panel">
+        <div class="case-list-header">
+          <div class="search-filter-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="case-search-input" class="search-input" placeholder="Search FIR, Section, Officer, Judge...">
+          </div>
+
+          <div class="case-filter-tags">
+            <button class="case-filter-btn active" data-status="all" data-i18n="filter_all">All Cases</button>
+            <button class="case-filter-btn" data-status="trial" data-i18n="filter_trial">In Trial</button>
+            <button class="case-filter-btn" data-status="secured" data-i18n="filter_secured">Secured</button>
+            <button class="case-filter-btn" data-status="flagged" data-i18n="filter_flagged">Tamper Alert</button>
+          </div>
+        </div>
+
+        <div id="case-items-list" class="case-items-scroll">
+          <!-- Populated dynamically -->
+        </div>
+      </aside>
+
+      <!-- Right Column: Case Dossier & Chain of Custody Explorer -->
+      <section class="case-dossier-panel">
+        <div class="dossier-header">
+          <div class="dossier-primary-meta">
+            <h2 id="dossier-case-title">Loading Mission-Critical Case...</h2>
+            <p id="dossier-case-meta">Investigator & Judicial Docket Loading...</p>
+          </div>
+
+          <div class="dossier-actions">
+            <button class="btn-primary" onclick="openCertificateModal()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span data-i18n="btn_verify">Verify Merkle Proof</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dossier Sub-Tabs -->
+        <div class="dossier-subtabs">
+          <button class="subtab-btn active" data-tab="timeline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span data-i18n="tab_timeline">Chain of Custody Flow</span>
+          </button>
+
+          <button class="subtab-btn" data-tab="documents">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <span data-i18n="tab_docs">Evidence Vault & FIR Records</span>
+            <span class="subtab-badge">4 Docs</span>
+          </button>
+
+          <button class="subtab-btn" data-tab="tamper-lab">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span data-i18n="tab_tamper">Live Tamper Simulator</span>
+            <span class="subtab-badge" style="background: var(--accent-rose-light); color: var(--accent-rose); font-weight: 700;">Interactive</span>
+          </button>
+        </div>
+
+        <!-- Dossier Body Content Container -->
+        <div class="dossier-content-scroll">
+
+          <!-- 1. Chain of Custody Timeline -->
+          <div id="dossier-timeline-content">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- 2. Evidence Vault & Documents -->
+          <div id="dossier-docs-content" style="display: none;">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- 3. Interactive Tamper Simulator Lab -->
+          <div id="dossier-tamper-content" style="display: none;">
+            <div class="tamper-lab-container">
+              <div class="lab-banner">
+                <h2>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                  <span data-i18n="lab_banner_title">Live Tamper Simulation & Cryptographic Breakpoint Station</span>
+                </h2>
+                <p data-i18n="lab_banner_desc">
+                  Experience first-hand why physical paperwork and fragmented legacy silos expose evidence to undetected tampering. 
+                  Modify any word, ballistic serial number, or witness deposition below to observe how Aegis-Veritas calculates SHA-256 in real time via the browser's native Web Crypto engine and instantly detects unauthorized modification!
+                </p>
+              </div>
+
+              <!-- Document Selector & Status -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <label for="tamper-doc-select" style="font-size: 0.84rem; font-weight: 700; color: var(--text-main);" data-i18n="select_doc_label">
+                    Select Active Document:
+                  </label>
+                  <select id="tamper-doc-select" style="background: var(--bg-primary); border: 1px solid var(--border-medium); color: var(--text-main); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; outline: none; font-weight: 600;">
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+
+                <div id="tamper-integrity-status" class="alert-badge" style="background: var(--accent-emerald-light); border-color: #a7f3d0; color: var(--accent-emerald);">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                  <span data-i18n="status_verified">INTEGRITY VERIFIED (MERKLE PROOF VALID)</span>
+                </div>
+              </div>
+
+              <!-- Tamper Workstation -->
+              <div class="tamper-workstation">
+                <!-- Left: Editable Record Surface -->
+                <div class="tamper-card">
+                  <div class="tamper-card-header">
+                    <h3>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                      <span data-i18n="editor_title">Simulated Record Editor (Type or Inject Tampering)</span>
+                    </h3>
+                  </div>
+
+                  <div class="tamper-editor-wrap">
+                    <textarea id="tamper-input-text" class="tamper-textarea" spellcheck="false" placeholder="Document content..."></textarea>
+                    
+                    <div>
+                      <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 700;" data-i18n="preset_title">
+                        PRESET TAMPER ATTACKS (CLICK TO SIMULATE CORRUPTION):
+                      </div>
+                      <div class="preset-injection-buttons">
+                        <button class="btn-tamper-action" onclick="injectTamperScenario('weapon')">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="btn_tamper_weapon">Tamper Weapon Serial & Striation</span>
+                        </button>
+
+                        <button class="btn-tamper-action" onclick="injectTamperScenario('witness')">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="btn_tamper_witness">Retract Sec 164 Witness ID</span>
+                        </button>
+
+                        <button class="btn-tamper-action" onclick="injectTamperScenario('narcotics')">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="btn_tamper_narcotics">Dilute Contraband & Mass</span>
+                        </button>
+
+                        <button class="btn-tamper-action" onclick="injectTamperScenario('timestamp')">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="btn_tamper_timestamp">Forge FIR Alibi Timestamp</span>
+                        </button>
+
+                        <button class="btn-reset-clean" onclick="resetTamperClean()">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                          </svg>
+                          <span data-i18n="btn_restore">Restore Authentic Text</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right: Cryptographic Checksum & Live Breakpoint -->
+                <div id="tamper-recalc-card" class="tamper-card verified">
+                  <div class="tamper-card-header">
+                    <h3>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
+                      <span data-i18n="recalc_title">Real-Time Cryptographic Verification</span>
+                    </h3>
+                  </div>
+
+                  <div class="hash-comparison-board">
+                    <div class="hash-row">
+                      <span class="hash-label" data-i18n="hash_orig_label">Authentic Ledger Ingestion Hash (SHA-256 Sealed at FIR Intake):</span>
+                      <div id="tamper-original-hash" class="hash-box match">
+                        e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                      </div>
+                    </div>
+
+                    <div class="hash-row">
+                      <span class="hash-label" data-i18n="hash_recalc_label">Current Live Computed Document Hash (Browser Web Crypto API):</span>
+                      <div id="tamper-recalc-hash-box" class="hash-box match">
+                        <span id="tamper-recalc-hash">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Side-by-Side Reality Breakdown -->
+                  <div class="system-impact-comparison">
+                    <div class="impact-card impact-legacy">
+                      <h4>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="15" y1="9" x2="9" y2="15"></line>
+                          <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        <span data-i18n="legacy_outcome_title">Fragmented Legacy Silo Outcome</span>
+                      </h4>
+                      <ul class="impact-list">
+                        <li>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="legacy_p1">Silent alteration: Physical page swapped in court file or local police database.</span>
+                        </li>
+                        <li>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="legacy_p2">No cryptographic checksum or historical change audit exists.</span>
+                        </li>
+                        <li>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                          <span data-i18n="legacy_p3">Case collapses in court due to disputed authenticity or corrupted evidence.</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="impact-card impact-modern">
+                      <h4>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span data-i18n="modern_outcome_title">Aegis-Veritas Ledger Defense</span>
+                      </h4>
+                      <ul class="impact-list">
+                        <li>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          <span data-i18n="modern_p1">Instant Breakpoint: Merkle root mismatch triggers instant forensic alert.</span>
+                        </li>
+                        <li>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          <span data-i18n="modern_p2">Officer & Lab HSM digital signatures cannot be forged or backdated.</span>
+                        </li>
+                        <li>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          <span data-i18n="modern_p3">Court relies on mathematically verifiable evidence certified under Sec 65B/63.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         Main View 2: Architectural Comparison Matrix (Legacy vs Modern)
+         ====================================================================== -->
+    <div id="arch-comparison-view" class="arch-comparison-container" style="display: none;">
+      <div class="arch-header">
+        <h2 data-i18n="arch_title">Comprehensive Structural Analysis: Legacy Silos vs. Unified Integrity Ledger</h2>
+        <p data-i18n="arch_desc">
+          Examining the 4 critical vectors of evidence exposure—from physical transit to siloed SQL databases—and how 
+          decentralized cryptographic anchoring guarantees non-repudiation across law enforcement, forensic science, and the judiciary.
+        </p>
+      </div>
+
+      <div class="arch-cards-row">
+        <!-- Legacy Silo Breakdown -->
+        <div class="arch-card">
+          <div class="arch-card-top">
+            <h3 style="font-size: 1.1rem; color: var(--text-main);" data-i18n="legacy_title">Current Fragmented Legacy Framework</h3>
+            <span class="arch-badge-legacy" data-i18n="legacy_badge">Vulnerable to Undetected Tampering</span>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              1. Physical Paperwork & Wax Seals
+            </h5>
+            <p>FIRs and witness statements exist on physical pulp sheets. Wax seals on evidence bags can be softened with thermal tools, contents substituted, and resealed without digital verification.</p>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              2. Disconnected Departmental Databases
+            </h5>
+            <p>Police CCTNS, Forensic LIMS, and Court e-Filing CIS run in separate network silos. Database administrators or rogue insiders can execute direct SQL updates (`UPDATE fir SET ...`) leaving zero inter-agency trace.</p>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              3. Courier Transit Latency & Handover Blindspots
+            </h5>
+            <p>Physical evidence envelopes travel via couriers over 5-15 days. Handover registers rely on handwritten logbooks where signatures can be forged, and lost items are only noticed weeks later in court.</p>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              4. Section 65B Electronic Admissibility Disputes
+            </h5>
+            <p>Defense counsels routinely challenge digital copies (CCTV footage, CDR logs, WhatsApp exports) due to unproven certificate chains and lack of mathematical immutability proofs.</p>
+          </div>
+        </div>
+
+        <!-- Aegis-Veritas Cryptographic Ledger -->
+        <div class="arch-card">
+          <div class="arch-card-top">
+            <h3 style="font-size: 1.1rem; color: var(--text-main);" data-i18n="modern_title">Aegis-Veritas Cryptographic Ledger</h3>
+            <span class="arch-badge-veritas" data-i18n="modern_badge">Mathematically Non-Repudiable</span>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              1. Instant SHA-256 Merkle Ingestion
+            </h5>
+            <p>The instant an FIR, witness audio recording, or seizure memo is generated, its SHA-256 cryptographic digest is anchored into a federated Merkle Tree. Physical bags carry tamper-evident RFID/QR cryptographic tags.</p>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              2. Inter-Agency Hardware Security Module (HSM) Signing
+            </h5>
+            <p>Investigating Officers, Forensic Scientists, and Court Registrars sign records with PKI smartcards or biometric hardware tokens. Unauthorized database tampering is rejected automatically by ledger consensus.</p>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              3. Continuous Real-Time Handover Telemetry
+            </h5>
+            <p>When evidence moves from Police to FSL, receiving scientists scan the physical QR tag; Aegis-Veritas verifies the manifest hash against the seizure entry within seconds. Discrepancies trigger automated court alerts.</p>
+          </div>
+
+          <div class="arch-step-item">
+            <h5>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              4. Automated Judicial Electronic Certificate Generation
+            </h5>
+            <p>Courts generate certified Section 65B (Indian Evidence Act) / Section 63 (Bharatiya Sakshya Adhiniyam) / US FRE 902(13)&(14) certificates with one click, embedding verifiable cryptographic proofs into the bench docket.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       Modal 1: Document Deep Inspection
+       ======================================================================== -->
+  <div id="doc-modal-overlay" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-doc-title">Inspect Sealed Legal Document</h3>
+        <button id="modal-close-btn" class="btn-close-modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-subtle); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 16px;">
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Cryptographic Digest (SHA-256):</div>
+          <div id="modal-doc-hash" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-blue); word-break: break-all; margin-top: 2px; font-weight: 700;"></div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; font-weight: 700;">Authorized Signatory & Timestamp:</div>
+          <div id="modal-doc-signer" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-emerald); margin-top: 2px; font-weight: 700;"></div>
+        </div>
+
+        <pre id="modal-doc-body" style="white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.82rem; background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 16px; color: var(--text-main); line-height: 1.5; max-height: 380px; overflow-y: auto;"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Modal 2: Certified Electronic Evidence Admissibility Certificate
+       ======================================================================== -->
+  <div id="cert-modal-overlay" class="modal-overlay">
+    <div class="modal-card" style="max-width: 820px;">
+      <div class="modal-header">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Electronic Evidence Integrity Certificate (Sec 65B / 63 BSA / FRE 902)
+        </h3>
+        <button id="cert-close-btn" class="btn-close-modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="cert-frame">
+          <div class="cert-header">
+            <h4>CERTIFICATE OF ELECTRONIC EVIDENCE INTEGRITY & CUSTODY PROVENANCE</h4>
+            <p>Issued under Section 65B(4) Indian Evidence Act / Section 63 Bharatiya Sakshya Adhiniyam 2023</p>
+          </div>
+
+          <div class="cert-row">
+            <span class="cert-label">Master Case Identifier:</span>
+            <span id="cert-case-id" class="cert-val">FIR-2026-1194-HOM</span>
+          </div>
+
+          <div class="cert-row">
+            <span class="cert-label">Cognizant Judicial Court:</span>
+            <span id="cert-court" class="cert-val">Hon'ble Special Sessions Court 04</span>
+          </div>
+
+          <div class="cert-row">
+            <span class="cert-label">Case Merkle Root Hash:</span>
+            <span id="cert-merkle-root" class="cert-val">7e9b4a1f6804e339d2ca1e49bbf870fa4519965a3962b9a712c49e2dcbe53911</span>
+          </div>
+
+          <div class="cert-row">
+            <span class="cert-label">Investigating Agency:</span>
+            <span id="cert-officer" class="cert-val">Special Crime Branch (IO: ACP Vikramaditya Singh)</span>
+          </div>
+
+          <div class="cert-row">
+            <span class="cert-label">Accredited Forensic Laboratory:</span>
+            <span id="cert-fsl" class="cert-val">CFSL Ballistics Wing (Dr. Ananya Roy)</span>
+          </div>
+
+          <div class="cert-row">
+            <span class="cert-label">Ledger Consensus State:</span>
+            <span class="cert-val" style="color: var(--accent-emerald);">MATHEMATICALLY UNALTERED (ZERO DISCREPANCIES)</span>
+          </div>
+
+          <p style="font-size: 0.82rem; color: var(--text-body); margin-top: 14px; line-height: 1.5;">
+            I hereby certify that all documents, physical exhibits, witness depositions under Sec 161/164, and forensic ballistic/toxicology 
+            findings associated with this docket have been maintained within a cryptographically sealed hardware environment without interruption. 
+            No unauthorized alteration, record deletion, or page substitution has occurred since original ingestion.
+          </p>
+
+          <div class="cert-signatures">
+            <div class="cert-sig-box">
+              <span>DIGITALLY SIGNED VIA HSM PKI TOKEN</span>
+              <div class="cert-sig-name">Superintendent of Police / CID</div>
+              <span style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Key ID: 0x90A1...E412 • RSA-4096</span>
+            </div>
+            <div class="cert-sig-box">
+              <span>BENCH REGISTRAR COUNTER-SIGNATURE</span>
+              <div class="cert-sig-name">Registrar, Sessions Judiciary</div>
+              <span style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Key ID: 0x44BC...9901 • Ed25519</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
+          <button class="btn-primary" onclick="printCertificate()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print / Export Official Certificate
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
